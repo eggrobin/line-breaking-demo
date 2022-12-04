@@ -1,0 +1,28 @@
+
+const worker = new Worker('line_breaking_algorithm.js');
+
+worker.onmessage = (e) => {
+  [unicode15, proposed, errors] = e.data;
+  document.getElementById("unicode15").innerHTML = unicode15;
+  document.getElementById("proposed").innerHTML = proposed;
+  document.getElementById("errors").innerHTML = errors;
+}
+
+
+window.onload = (e) => {
+  params = (new URL(document.location)).searchParams;
+  if (params.has("text")) {
+    document.getElementById("text").value = params.get("text");
+  }
+  worker.postMessage(
+    [document.getElementById("text").value,
+      UNICODE_15_CLASSES,
+      UNICODE_15_WITH_L2_22_080R2_CLASSES]);
+
+  document.getElementById("text").oninput = (e) => {
+    worker.postMessage(
+      [e.target.value,
+        UNICODE_15_CLASSES,
+        UNICODE_15_WITH_L2_22_080R2_CLASSES]);
+  }
+}

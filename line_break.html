@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Line Breaking Demo</title>
+<script src="unicode_15_classes.js"></script>
+<script src="unicode_15_with_l2_080r2_classes.js"></script>
+<script src="demo.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Balinese&family=Noto+Sans+Batak&family=Noto+Sans+Brahmi&family=Noto+Sans+Cham&family=Noto+Sans+Grantha&family=Noto+Sans+Javanese&family=Noto+Sans&family=Noto+Sans+Cuneiform&display=swap');
+
+  .input, .preview {
+    font-family: 'Noto Sans', 'Noto Sans Balinese', 'Noto Sans Batak', 'Noto Sans Brahmi', 'Noto Sans Cham', 'Noto Sans Grantha', 'Noto Sans Javanese', 'Noto Sans Cuneiform', sans-serif;
+    font-size:10pt;
+  }
+
+  .nobreak {
+    white-space:nowrap;
+  }
+
+  #errors {
+    background-color: lightcoral;
+  }
+
+  span.allowed {
+    border-left: 1px solid red;
+  }
+
+  span.mandatory::before {
+    content: "↵";
+    color: red;
+  }
+</style>
+</head>
+<body>
+<p>
+This is a (very inefficient) JavaScript implementation of the Unicode Line Breaking Algorithm, version 15.0,
+together with the same algorithm as amended by document L2/22-080R2.
+</p>
+<div id="errors"></div>
+<table style="width: 100%; table-layout: fixed ">
+<thead><tr><th>Input</th><th>Proposed</th><th>Unicode 15.0</th></tr></thead>
+<tbody>
+<tr>
+<td style="width: 40%; vertical-align: top">
+<textarea class="input" id="text" rows="30" style="resize:vertical;width:90%">
+ệ (e◌̂◌̣)
+◌́◌̀◌̉◌̈◌̣…
+
+🐈🦔⌛
+1 Thrice the brinded Cat hath mew'd.
+2 Thrice, and once the Hedge-Pigge whin'd.
+3 Harpier cries, 'tis time, 'tis time.
+
+【第一章】【一節】子曰、 學而時習之、不亦說乎。【二節】有朋自遠方來、不亦樂乎。【三節】人不知而不慍、不亦君子乎。
+
+𒂊𒉡𒈠​𒂊𒇺​𒆷​𒈾𒁍𒌑​𒃻𒈠𒈬​𒉺𒅁𒇺​𒄠𒈠𒌈​𒋗𒈠​𒆷​𒍠𒋥
+
+person(s)
+日中韓統合漢字拡張G「ユニコード」
+
+Puis il ajouta ces paroles mystérieuses : — Hélas ! hélas ! les petites choses viennent à bout des grandes ; une dent triomphe d’une masse. Le rat du Nil tue le crocodile, l’espadon tue la baleine, le livre tuera l’édifice !
+
+᭛ ᭜ ᭛ᬒᬁᬅᬯᬶᬖ᭄ᬦᬵᬫᬵᬲ᭄ᬢᬸ᭛ ᭜ ᭛ᬰ᭄ᬭᬷᬩᬚ᭄ᬭᬵᬚ᭄ᬜᬵᬦᬰᬹᬦ᭄ᬬᬵᬢ᭄ᬫᬓᬧᬭᬫᬲᬶᬭᬵᬦᬶᬦ᭄ᬤ᭄ᬬᬭᬶᬂᬭᬵᬢ᭄ᬯᬶᬰᬾᬱ᭞ᬮᬶᬮᬵᬰᬹᬤ᭄ᬥᬵᬧᬺᬢᬶᬱ᭄ᬝᬾᬂᬳᬺᬤᬬᬚᬬᬬᬵᬗ᭄ᬓᭃᬦ᭄ᬫᬳᬵᬲ᭄ᬯᬃᬕ᭄ᬕᬮᭀᬓ᭞ᬏᬓᬵᬲᬢ᭄ᬭᬾᬂᬰᬭᬶᬭᬵᬗᬸᬭᬶᬧᬶᬲᬳᬦᬦᬶᬂᬪᬹᬃᬪᬸᬯᬄᬲ᭄ᬯᬄᬧ᭄ᬭᬓᬶᬃᬡ᭄ᬦ᭞ᬲᬵᬓ᭄ᬱᬢ᭄ᬘᬦ᭄ᬤ᭄ᬭᬵᬓ᭄ᬓᬧᬸᬃᬡ᭄ᬦᬤ᭄ᬪᬸᬢᬭᬶᬯᬶᬚᬶᬮᬶᬭᬵᬦ᭄ᬲᬗ᭄ᬓᬭᬶᬂᬩᭀᬤ᭄ᬥᬘᬷᬢ᭄ᬢᬗ᭄ᬮᬲᬶᬗ᭄ᬕᬶᬄᬬᬦ᭄ᬲᬶᬤ᭄ᬥᬬᭀᬕᬶᬰ᭄ᬯᬭᬯ᭄ᬓᬲᬶᬭᬲᬂᬲᬢ᭄ᬫ᭄ᬬᬮᬵᬯᬦ᭄ᬪᬝᬵᬭ᭞ᬲᬃᬯ᭄ᬯᬚ᭄ᬜᬵᬫᬹᬃᬢ᭄ᬢᬶᬰᬹᬦ᭄ᬬᬵᬕᬦᬮᬮᬶᬢᬶᬦᬸᬘᬧ᭄‌ᬫᬸᬱ᭄ᬝᬶᬓᬶᬂᬥᬃᬫ᭄ᬫᬢᬢ᭄ᬯ᭞ᬲᬂᬲᬶᬧ᭄ᬢᬵᬦ᭄ᬧ‌ᬢ᭄ᬳᬸᬮᬶᬓ᭄ᬭᬶᬳᬢᬶᬲᬶᬭᬲ᭄ᬓᬸᬗᭂᬦ᭄‌ᬬᭀᬕᬮᬵᬯᬦ᭄ᬲᬫᬵᬥᬶ᭞ᬩ᭄ᬬᬓ᭄ᬢᬮ᭄ᬯᬶᬃᬪ᭄ᬭᬦ᭄ᬢᬘᬷᬳ᭄ᬢᬵᬗ᭄ᬭᬲᬭᬶᬯᬭᬶᬯᬦᬶᬂᬦᬶᬃᬫ᭄ᬫᬮᬵᬘᬶᬦ᭄ᬢ᭄ᬬᬭᬹᬧᬗ᭄ᬕ᭄ᬬᬦ᭄ᬤᬄᬬᬾᬓᬦ᭄ᬫᬗ᭄ᬓᬦᬵᬰᬦ᭄ᬢᬶᬓᬶᬦ᭄ᬜᭂᬧᬶᬢᬸᬢᬸᬃᬲᬂᬳᬸᬯᬸᬲ᭄ᬲᬶᬤ᭄ᬥᬬᭀᬕᬶ᭞ᬧᬹᬚᬦ᭄ᬭᬶᬂᬚ᭄ᬜᬵᬦᬰᬹᬤ᭄ᬥᬵᬧᬭᬶᬫᬶᬢᬰᬭᬡᬵᬦᬶᬂᬫᬶᬓᭂᬢ᭄ᬮᬗ᭄ᬯᬮᬗ᭄ᬯᬦ᭄᭞ᬤᬹᬭᬵᬦ᭄‌ᬗ᭄ᬯᬂᬲᬶᬤ᭄ᬥ᭠ᬓᬯ᭄ᬬᬵᬗᬶᬤᬸᬗᬳᬶᬯᬗᬧᬦ᭄ᬢᬦ᭄‌ᬯ᭄ᬭᬸᬳᬶᬂᬰᬵᬲ᭄ᬢ᭄ᬭᬫᬢ᭄ᬭ᭞ᬗ᭄ᬳᬶᬂᬓᬾᬯ᭄ᬭᬦ᭄ᬤᬾᬦᬶᬗᬫ᭄ᬩᭂᬓ᭄ᬭᬕᬭᬕᬦᬶᬫᬦᬄᬲᬂᬓᬯᬷᬭᬵᬚ᭄ᬬᬰᭀᬪ
+</textarea>
+</td>
+<td class="preview" id="proposed" style="width:30%;vertical-align:top"></td>
+<td class="preview" id="unicode15" style="width: 30%; vertical-align: top"></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
