@@ -5,7 +5,7 @@
 <title>Line Breaking Demo</title>
 <script src="unicode_15_classes.js"></script>
 <script src="unicode_15_with_l2_080r2_classes.js"></script>
-<script src="demo.js"></script>
+<script src="demo.js?20221206"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Balinese&family=Noto+Sans+Batak&family=Noto+Sans+Brahmi&family=Noto+Sans+Cham&family=Noto+Sans+Grantha&family=Noto+Sans+Javanese&family=Noto+Sans&family=Noto+Sans+Cuneiform&display=swap');
 
@@ -23,12 +23,17 @@
   }
 
   span.allowed {
-    border-left: 1px solid red;
+    border-left: 1px solid blue;
   }
 
   span.mandatory::before {
     content: "↵";
+    color: blue;
+  }
+
+  .changed {
     color: red;
+    border-color: red;
   }
 </style>
 </head>

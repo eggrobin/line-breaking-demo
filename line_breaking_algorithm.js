@@ -4,42 +4,49 @@ let UNICODE_15_WITH_L2_22_080R2_CLASSES;
 onmessage = (e) => {
   let text;
   [text, UNICODE_15_CLASSES, UNICODE_15_WITH_L2_22_080R2_CLASSES, proposal] = e.data;
-  let breaker = new LineBreaker(text);
-  breaker.resolve_with_unicode_15();
+  let unicode_15_breaker = new LineBreaker(text);
+  unicode_15_breaker.resolve_with_unicode_15();
+  let proposed_breaker = new LineBreaker(text);
+  if (proposal == "L2/22-280R2") {
+    proposed_breaker.resolve_with_unicode_15_plus_l2_22_080r2();
+  } else if (proposal == "quotes") {
+    proposed_breaker.resolve_with_unicode_15_plus_quotes();
+  }
   let unicode15 = "<span class='nobreak'>";
-  unicode15 += break_to_html(breaker.resolved_breaks[0]);
-  for (let i = 0; i < breaker.original_code_points.length; ++i) {
-    unicode15 += to_html(breaker.original_code_points[i]);
-    unicode15 += break_to_html(breaker.resolved_breaks[i + 1]);
+  unicode15 += break_to_html(
+    unicode_15_breaker.resolved_breaks[0],
+    unicode_15_breaker.resolved_breaks[0] === proposed_breaker.resolved_breaks[0]);
+  for (let i = 0; i < unicode_15_breaker.original_code_points.length; ++i) {
+    unicode15 += to_html(unicode_15_breaker.original_code_points[i]);
+    unicode15 += break_to_html(
+      unicode_15_breaker.resolved_breaks[i + 1],
+      unicode_15_breaker.resolved_breaks[i + 1] === proposed_breaker.resolved_breaks[i + 1]);
   }
   unicode15 += "</span>";
-  let errors = breaker.errors;
-  let old_breaks = breaker.resolved_breaks;
-  breaker = new LineBreaker(text);
-  if (proposal == "L2/22-280R2") {
-    breaker.resolve_with_unicode_15_plus_l2_22_080r2();
-  } else if (proposal == "quotes") {
-    breaker.resolve_with_unicode_15_plus_quotes();
-  }
   let proposed = "<span class='nobreak'>";
-  proposed += break_to_html(breaker.resolved_breaks[0]);
-  for (let i = 0; i < breaker.original_code_points.length; ++i) {
-    proposed += to_html(breaker.original_code_points[i]);
-    proposed += break_to_html(breaker.resolved_breaks[i + 1]);
+  proposed += break_to_html(
+    proposed_breaker.resolved_breaks[0],
+    unicode_15_breaker.resolved_breaks[0] === proposed_breaker.resolved_breaks[0]);
+  for (let i = 0; i < proposed_breaker.original_code_points.length; ++i) {
+    proposed += to_html(proposed_breaker.original_code_points[i]);
+    proposed += break_to_html(
+      proposed_breaker.resolved_breaks[i + 1],
+      unicode_15_breaker.resolved_breaks[i + 1] === proposed_breaker.resolved_breaks[i + 1]);
   }
   proposed += "</span>";
-  let proposed_breaks = breaker.resolved_breaks;
-  if (proposed_breaks.every((b, i) => b === old_breaks[i])) {
-    errors = "The resolved breaks are identical.<br>" + errors;
+  let msg = "";
+  if (proposed_breaker.resolved_breaks.every((b, i) => b === unicode_15_breaker.resolved_breaks[i])) {
+    msg = "The resolved breaks are identical.<br>"
   }
-  postMessage([unicode15, proposed, errors + breaker.errors]);
+  postMessage([unicode15, proposed, msg + unicode_15_breaker.errors + proposed_breaker.errors]);
 }
 
-function break_to_html(type) {
+function break_to_html(type, same) {
+  changed = same ? "" : "changed";
   if (type == "!") {
-    return "</span><span class=mandatory><br></span><span class='nobreak'>";
+    return `</span><span class='mandatory ${changed}'><br></span><span class='nobreak'>`;
   } else if (type == "÷") {
-    return "</span><span class=allowed><wbr></span><span class='nobreak'>";
+    return `</span><span class='allowed ${changed}'><wbr></span><span class='nobreak'>`;
   } else if (type == "×") {
     return "";
   } else {
