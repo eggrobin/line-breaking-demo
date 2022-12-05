@@ -50,4 +50,7 @@ const UNICODE_15_CLASSES = [
   ["[CP-[p{ea=F}p{ea=W}p{ea=H}]]", "[\\u{0029}-\\u{0029}\\u{005D}-\\u{005D}]"],
   ["[^RI]", "[\\u{0000}-\\u{1F1E5}\\u{1F200}-\\u{10FFFF}]"],
   ["[p{Extended_Pictographic}&p{Cn}]", "[\\u{1F02C}-\\u{1F02F}\\u{1F094}-\\u{1F09F}\\u{1F0AF}-\\u{1F0B0}\\u{1F0C0}-\\u{1F0C0}\\u{1F0D0}-\\u{1F0D0}\\u{1F0F6}-\\u{1F0FF}\\u{1F1AE}-\\u{1F1E5}\\u{1F203}-\\u{1F20F}\\u{1F23C}-\\u{1F23F}\\u{1F249}-\\u{1F24F}\\u{1F252}-\\u{1F25F}\\u{1F266}-\\u{1F2FF}\\u{1F6D8}-\\u{1F6DB}\\u{1F6ED}-\\u{1F6EF}\\u{1F6FD}-\\u{1F6FF}\\u{1F777}-\\u{1F77A}\\u{1F7DA}-\\u{1F7DF}\\u{1F7EC}-\\u{1F7EF}\\u{1F7F1}-\\u{1F7FF}\\u{1F80C}-\\u{1F80F}\\u{1F848}-\\u{1F84F}\\u{1F85A}-\\u{1F85F}\\u{1F888}-\\u{1F88F}\\u{1F8AE}-\\u{1F8AF}\\u{1F8B2}-\\u{1F8FF}\\u{1FA54}-\\u{1FA5F}\\u{1FA6E}-\\u{1FA6F}\\u{1FA7D}-\\u{1FA7F}\\u{1FA89}-\\u{1FA8F}\\u{1FABE}-\\u{1FABE}\\u{1FAC6}-\\u{1FACD}\\u{1FADC}-\\u{1FADF}\\u{1FAE9}-\\u{1FAEF}\\u{1FAF9}-\\u{1FAFF}\\u{1FC00}-\\u{1FFFD}]"],
+  // For the quotes proposal.
+  ["[:Pi:]", "[\\u{00AB}-\\u{00AB}\\u{2018}-\\u{2018}\\u{201B}-\\u{201C}\\u{201F}-\\u{201F}\\u{2039}-\\u{2039}\\u{2E02}-\\u{2E02}\\u{2E04}-\\u{2E04}\\u{2E09}-\\u{2E09}\\u{2E0C}-\\u{2E0C}\\u{2E1C}-\\u{2E1C}\\u{2E20}-\\u{2E20}]"],
+  ["[:Pf:]", "[\\u{00BB}-\\u{00BB}\\u{2019}-\\u{2019}\\u{201D}-\\u{201D}\\u{203A}-\\u{203A}\\u{2E03}-\\u{2E03}\\u{2E05}-\\u{2E05}\\u{2E0A}-\\u{2E0A}\\u{2E0D}-\\u{2E0D}\\u{2E1D}-\\u{2E1D}\\u{2E21}-\\u{2E21}]"],
 ];
