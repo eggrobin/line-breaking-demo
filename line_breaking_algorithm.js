@@ -42,7 +42,7 @@ onmessage = (e) => {
 }
 
 function break_to_html(type, same) {
-  changed = same ? "" : "changed";
+  changed = same ? "unchanged" : "changed";
   if (type == "!") {
     return `</span><span class='mandatory ${changed}'><br></span><span class='nobreak'>`;
   } else if (type == "÷") {
