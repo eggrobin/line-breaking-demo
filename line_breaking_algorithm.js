@@ -373,7 +373,7 @@ class LineBreaker {
       let right = this.remapped_code_points.slice(i).join("");
       if (!this.resolved_breaks[i]) {
         if (left.match(left_regex) && right.match(right_regex)) {
-          //console.log(left, type, right);
+          console.log(rule, ":", left, type, right);
           this.resolved_breaks[i] = type;
         } else {
           //console.log(left, "?", right);
@@ -387,10 +387,13 @@ class LineBreaker {
     for (let i = 0; i < this.remapped_code_points.length; ++i) {
       let match = this.remapped_code_points.slice(i).join("").match(regex);
       if (match) {
+        console.log(match[0], ":::", this.remapped_code_points.join());
         this.remapped_code_points[i] = match[0].replace(regex, replacement);
+        console.log(this.remapped_code_points.join());
         for (let j = 1; j < Array.from(match[0]).length; ++j) {
           this.remapped_code_points[i + j] = "";
         }
+        console.log(this.remapped_code_points.join());
         for (let j = 1; j < Array.from(match[0]).length; ++j) {
           this.resolved_breaks[i + j] = "×";
         }
