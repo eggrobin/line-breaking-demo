@@ -1,5 +1,5 @@
 
-const worker = new Worker('line_breaking_algorithm.js?20221217T0227');
+const worker = new Worker('line_breaking_algorithm.js?20221217T0305');
 
 worker.onmessage = (e) => {
   [unicode15, proposed, errors] = e.data;

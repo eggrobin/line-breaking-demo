@@ -385,7 +385,7 @@ class LineBreaker {
   remap(regex, replacement) {
     regex = new RegExp("^" + this.convert_regex(regex), "u");
     for (let i = 0; i < this.remapped_code_points.length; ++i) {
-      if (remapped_code_points[i] === "") {
+      if (this.remapped_code_points[i] === "") {
         continue;
       }
       let match = this.remapped_code_points.slice(i).join("").match(regex);
