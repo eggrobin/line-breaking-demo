@@ -379,8 +379,10 @@ class LineBreaker {
           //console.log(left, "?", right);
         }
       }
-      left += this.remapped_code_points[i];
-      right = right.slice(this.remapped_code_points[i].length);
+      if (i < this.remapped_code_points.length) {
+        left += this.remapped_code_points[i];
+        right = right.slice(this.remapped_code_points[i].length);
+      }
     }
   }
 
