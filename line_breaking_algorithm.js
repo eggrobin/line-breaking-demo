@@ -368,9 +368,9 @@ class LineBreaker {
     left_regex = new RegExp(this.convert_regex(left_regex) + "$", "u");
     right_regex = new RegExp("^" + this.convert_regex(right_regex), "u");
     //console.log(left_regex, type, right_regex);
-    let left = "";
-    let right = this.remapped_code_points.join("");
     for (let i = 0; i < this.resolved_breaks.length; ++i) {
+      let left = this.remapped_code_points.slice(0, i).join("");
+      let right = this.remapped_code_points.slice(i).join("");
       if (!this.resolved_breaks[i]) {
         if (left.match(left_regex) && right.match(right_regex)) {
           //console.log(left, type, right);
@@ -378,10 +378,6 @@ class LineBreaker {
         } else {
           //console.log(left, "?", right);
         }
-      }
-      if (i < this.remapped_code_points.length) {
-        left += this.remapped_code_points[i];
-        right = right.slice(right.codePointAt(0) > 0xFFFF ? 2 : 1);
       }
     }
   }
