@@ -373,7 +373,7 @@ class LineBreaker {
         let left = this.remapped_code_points.slice(0, i).join("");
         let right = this.remapped_code_points.slice(i).join("");
         if (left.match(left_regex) && right.match(right_regex)) {
-          console.log(rule, ":", left, type, right);
+          //console.log(rule, ":", left, type, right);
           this.resolved_breaks[i] = type;
         } else {
           //console.log(left, "?", right);
